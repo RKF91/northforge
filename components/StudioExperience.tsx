@@ -39,6 +39,10 @@ function Arrow() {
   return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.4" /></svg>;
 }
 
+function StudioLogo({ priority = false }: { priority?: boolean }) {
+  return <span className="studio-logo"><Image src="/images/northforge-logo.png" alt="" width={1000} height={1000} priority={priority} /></span>;
+}
+
 export function StudioExperience() {
   const root = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -74,6 +78,11 @@ export function StudioExperience() {
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
         gsap.to(el, { yPercent: -10, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: 1 } });
       });
+      gsap.to(".case-phone", { yPercent: -13, rotate: 1.5, ease: "none", scrollTrigger: { trigger: ".case-featured", start: "top bottom", end: "bottom top", scrub: 1 } });
+      gsap.to(".process-glyph", { rotate: 180, stagger: .12, ease: "none", scrollTrigger: { trigger: ".process-steps", start: "top bottom", end: "bottom top", scrub: 1 } });
+      gsap.from(".service-list article h3", { x: -24, opacity: .15, stagger: .08, ease: "power2.out", scrollTrigger: { trigger: ".service-list", start: "top 82%", end: "bottom 65%", scrub: 1 } });
+      gsap.from(".contact-form label", { y: 24, opacity: 0, stagger: .08, ease: "power2.out", scrollTrigger: { trigger: ".contact-form", start: "top 84%", once: true } });
+      gsap.to(".ambient-orb", { xPercent: 90, yPercent: 310, rotate: 240, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 1.3 } });
       gsap.to(".progress", { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: .2 } });
     }, root);
     return () => ctx.revert();
@@ -98,9 +107,10 @@ export function StudioExperience() {
       <a className="skip-link" href="#main">Skip to content</a>
       <div className="loader" aria-hidden="true"><div className="loader-mark"><span>N</span><i /></div><div className="loader-copy">Forging the first impression</div><div className="loader-track"><span className="loader-line" /></div></div>
       <div className="progress" aria-hidden="true" />
+      <div className="ambient-orb" aria-hidden="true"><i /><i /></div>
 
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="NorthForge home"><span className="brand-rune">N</span><span>NorthForge<small>Digital atelier</small></span></a>
+        <a className="brand logo-link" href="#top" aria-label="NorthForge Studio home"><StudioLogo priority /></a>
         <nav className={menuOpen ? "nav open" : "nav"} aria-label="Primary navigation">
           <a href="#work" onClick={() => setMenuOpen(false)}>Work</a><a href="#services" onClick={() => setMenuOpen(false)}>Expertise</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Investment</a><a href="#process" onClick={() => setMenuOpen(false)}>Process</a>
         </nav>
@@ -177,7 +187,7 @@ export function StudioExperience() {
         </section>
       </main>
 
-      <footer><a className="brand footer-brand" href="#top"><span className="brand-rune">N</span><span>NorthForge<small>Digital atelier</small></span></a><p>Websites with gravity.<br />Ontario, Canada · Working beyond.</p><nav aria-label="Footer navigation"><a href="#work">Work</a><a href="#services">Expertise</a><a href="#pricing">Investment</a><a href="#contact">Contact</a></nav><div><span>© 2026 NorthForge</span><a href="#top">Back to the top ↑</a></div></footer>
+      <footer><a className="brand footer-brand logo-link" href="#top" aria-label="NorthForge Studio home"><StudioLogo /></a><p>Websites with gravity.<br />Ontario, Canada · Working beyond.</p><nav aria-label="Footer navigation"><a href="#work">Work</a><a href="#services">Expertise</a><a href="#pricing">Investment</a><a href="#contact">Contact</a></nav><div><span>© 2026 NorthForge</span><a href="#top">Back to the top ↑</a></div></footer>
     </div>
   );
 }

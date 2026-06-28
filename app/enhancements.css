@@ -1,0 +1,259 @@
+/* Persistent navigation, supplied brand mark, deeper motion, and priority-plan aura. */
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  right: auto;
+  width: min(calc(100% - 32px), 1340px);
+  height: 72px;
+  margin: 0;
+  padding: 0 22px 0 8px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(226, 194, 135, 0.2);
+  border-radius: 4px;
+  background: rgba(9, 9, 7, 0.76);
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.24), inset 0 1px rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(18px) saturate(125%);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+}
+
+.logo-link {
+  width: 180px;
+  height: 66px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.studio-logo {
+  position: relative;
+  display: block;
+  width: 180px;
+  height: 66px;
+  overflow: hidden;
+}
+
+.studio-logo img {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  max-width: none;
+  left: -25px;
+  top: -80px;
+  object-fit: contain;
+}
+
+.nav a {
+  position: relative;
+  padding: 11px 0;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.35s ease;
+}
+
+.nav a:hover::after,
+.nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.ambient-orb {
+  position: fixed;
+  z-index: 0;
+  top: 18vh;
+  left: -11vw;
+  width: 28vw;
+  height: 28vw;
+  min-width: 280px;
+  min-height: 280px;
+  border: 1px solid rgba(199, 161, 94, 0.08);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(178, 116, 34, 0.12), rgba(178, 116, 34, 0.025) 42%, transparent 68%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.ambient-orb i {
+  position: absolute;
+  inset: 14%;
+  border: 1px solid rgba(224, 186, 112, 0.12);
+  border-radius: 50%;
+  animation: ambient-ring 13s linear infinite;
+}
+
+.ambient-orb i:last-child {
+  inset: 29%;
+  animation-direction: reverse;
+  animation-duration: 9s;
+}
+
+@keyframes ambient-ring {
+  50% { transform: scale(1.12) rotate(180deg); opacity: 0.45; }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+.case {
+  isolation: isolate;
+}
+
+.case::after {
+  content: "";
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgba(235, 205, 148, 0.09) 50%, transparent 62%);
+  transform: translateX(-120%);
+  transition: transform 1.15s cubic-bezier(.2,.75,.2,1);
+  pointer-events: none;
+}
+
+.case:hover::after {
+  transform: translateX(120%);
+}
+
+.service-list article {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-list article::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent 72%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.65s cubic-bezier(.2,.8,.2,1);
+}
+
+.service-list article:hover::before {
+  transform: scaleX(1);
+}
+
+.price-card.featured {
+  --aura: rgba(205, 158, 73, 0.4);
+  isolation: isolate;
+  overflow: visible;
+  background: linear-gradient(155deg, #211d13 0%, #11110e 52%, #1c170f 100%);
+  border-color: #d0a75e;
+  box-shadow:
+    0 0 0 1px rgba(247, 213, 147, 0.24),
+    0 0 32px var(--aura),
+    0 0 82px rgba(167, 111, 31, 0.28),
+    0 35px 100px rgba(61, 40, 9, 0.34),
+    inset 0 1px rgba(255, 238, 196, 0.13);
+  animation: priority-aura 3.2s ease-in-out infinite;
+}
+
+.price-card.featured::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -18px;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at center, rgba(214, 168, 85, 0.34), rgba(192, 126, 31, 0.11) 44%, transparent 72%);
+  filter: blur(20px);
+  opacity: 0.86;
+  pointer-events: none;
+}
+
+.price-card.featured::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(112deg, transparent 28%, rgba(255, 225, 164, 0.13) 46%, transparent 62%);
+  transform: translateX(-115%);
+  animation: priority-sheen 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.price-card.featured > * {
+  position: relative;
+  z-index: 1;
+}
+
+.price-card.featured .recommend {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #181208;
+  background: linear-gradient(90deg, #b98538, #f0d391 52%, #b98538);
+  box-shadow: 0 0 24px rgba(220, 174, 88, 0.42);
+}
+
+@keyframes priority-aura {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(247,213,147,.22), 0 0 25px rgba(205,158,73,.31), 0 0 65px rgba(167,111,31,.2), 0 35px 100px rgba(61,40,9,.3), inset 0 1px rgba(255,238,196,.13); }
+  50% { box-shadow: 0 0 0 1px rgba(255,224,164,.44), 0 0 48px rgba(223,174,86,.52), 0 0 110px rgba(180,119,34,.37), 0 40px 110px rgba(61,40,9,.42), inset 0 1px rgba(255,238,196,.2); }
+}
+
+@keyframes priority-sheen {
+  0%, 56% { transform: translateX(-115%); }
+  82%, 100% { transform: translateX(115%); }
+}
+
+.process-glyph i {
+  box-shadow: 0 0 24px rgba(185, 137, 63, 0.1);
+  animation: glyph-breathe 3.4s ease-in-out infinite;
+}
+
+@keyframes glyph-breathe {
+  50% { border-color: #d1a75f; box-shadow: 0 0 34px rgba(185,137,63,.26); }
+}
+
+.contact-form label {
+  transition: border-color 0.35s, background 0.35s, padding 0.35s;
+}
+
+.contact-form label:focus-within {
+  padding-left: 12px;
+  border-color: #ad8545;
+  background: linear-gradient(90deg, rgba(183, 135, 65, 0.08), transparent 70%);
+}
+
+.section-heading h2,
+.manifesto h2,
+.belief h2 {
+  text-wrap: balance;
+}
+
+@media (max-width: 980px) {
+  .site-header { padding: 0 15px 0 2px; }
+  .nav { top: 0; }
+  .logo-link, .studio-logo { width: 162px; }
+}
+
+@media (max-width: 680px) {
+  .site-header {
+    top: 8px;
+    width: calc(100% - 16px);
+    height: 62px;
+  }
+  .logo-link, .studio-logo { width: 150px; height: 58px; }
+  .studio-logo img { width: 215px; height: 215px; left: -21px; top: -75px; }
+  .ambient-orb { opacity: 0.55; }
+  .price-card.featured::before { inset: -9px; filter: blur(14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb i,
+  .price-card.featured,
+  .price-card.featured::after,
+  .process-glyph i { animation: none; }
+}
