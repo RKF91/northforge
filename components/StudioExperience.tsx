@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const ForgeScene = dynamic(() => import("./ForgeScene"), { ssr: false });
+const ScrollArtifacts = dynamic(() => import("./ScrollArtifacts"), { ssr: false });
 
 const services = [
   ["01", "Custom Website Design", "No page-builder fingerprints. Every screen is composed around your brand, your customer, and the action that matters."],
@@ -108,6 +109,7 @@ export function StudioExperience() {
       <div className="loader" aria-hidden="true"><div className="loader-mark"><span>N</span><i /></div><div className="loader-copy">Forging the first impression</div><div className="loader-track"><span className="loader-line" /></div></div>
       <div className="progress" aria-hidden="true" />
       <div className="ambient-orb" aria-hidden="true"><i /><i /></div>
+      {desktop3D && <ScrollArtifacts />}
 
       <header className="site-header">
         <a className="brand logo-link" href="#top" aria-label="NorthForge Studio home"><StudioLogo priority /></a>
@@ -158,10 +160,10 @@ export function StudioExperience() {
         <section className="pricing section-pad" id="pricing">
           <div className="section-heading" data-reveal><div><p className="section-index">03 / Investment</p><h2>Clear starting points.</h2></div><p>One-time website investment, typically delivered in 2–4 weeks. Scope is confirmed before work begins.</p></div>
           <div className="price-label"><span>Website packages</span><i /></div>
-          <div className="pricing-grid" data-stagger>{websitePlans.map((plan) => <article className={plan.featured ? "price-card featured" : "price-card"} key={plan.name}>{plan.featured && <span className="recommend">Most popular</span>}<div><p>Starting at</p><strong>{plan.price}</strong></div><h3>{plan.name}</h3><p>{plan.note}</p><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href="#contact">Choose {plan.name.replace(" Website", "")} <Arrow /></a></article>)}</div>
+          <div className="pricing-grid" data-stagger>{websitePlans.map((plan) => <article className={plan.featured ? "price-card featured" : "price-card"} key={plan.name}>{plan.featured && <div className="plan-aura" aria-hidden="true"><i /><i /><i /></div>}{plan.featured && <span className="recommend">Most popular</span>}<div><p>Starting at</p><strong>{plan.price}</strong></div><h3>{plan.name}</h3><p>{plan.note}</p><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href="#contact">Choose {plan.name.replace(" Website", "")} <Arrow /></a></article>)}</div>
           <div className="price-label support-label"><span>Monthly support</span><i /></div>
           <p className="support-intro" data-reveal>Keep the site cared for after launch. <em>Plus Management is the smart default</em> for active updates without a high-touch partnership.</p>
-          <div className="pricing-grid support-grid" data-stagger>{supportPlans.map((plan) => <article className={plan.featured ? "price-card featured" : "price-card"} key={plan.name}>{plan.featured && <span className="recommend">Recommended</span>}<div><p>Monthly</p><strong>{plan.price}<small>/mo</small></strong></div><h3>{plan.name}</h3><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href="#contact">Select plan <Arrow /></a></article>)}</div>
+          <div className="pricing-grid support-grid" data-stagger>{supportPlans.map((plan) => <article className={plan.featured ? "price-card featured" : "price-card"} key={plan.name}>{plan.featured && <div className="plan-aura" aria-hidden="true"><i /><i /><i /></div>}{plan.featured && <span className="recommend">Recommended</span>}<div><p>Monthly</p><strong>{plan.price}<small>/mo</small></strong></div><h3>{plan.name}</h3><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href="#contact">Select plan <Arrow /></a></article>)}</div>
         </section>
 
         <section className="process section-pad" id="process">
