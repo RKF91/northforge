@@ -61,6 +61,7 @@ export function StudioExperience() {
       intro.to(".loader-mark", { scale: 1, opacity: 1, duration: .65 })
         .to(".loader-line", { scaleX: 1, duration: .8 }, "<.1")
         .to(".loader", { yPercent: -102, duration: .9, ease: "power4.inOut", delay: .15 })
+        .set(".loader", { display: "none" })
         .from(".hero-kicker, .hero-title .word, .hero-copy, .hero-actions", { y: 40, opacity: 0, duration: .85, stagger: .09 }, "-=.35")
         .from(".hero-orbit", { scale: .75, opacity: 0, duration: 1.1 }, "<.2");
 

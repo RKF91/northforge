@@ -1,0 +1,19 @@
+/* Never let a failed or stale JavaScript chunk trap visitors behind the intro. */
+.loader {
+  animation: loader-safety 0.01s 3.2s forwards;
+}
+
+@keyframes loader-safety {
+  to {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    animation: none;
+    display: none;
+  }
+}
