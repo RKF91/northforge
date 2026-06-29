@@ -84,6 +84,9 @@ export function StudioExperience() {
       gsap.from(".service-list article h3", { x: -24, opacity: .15, stagger: .08, ease: "power2.out", scrollTrigger: { trigger: ".service-list", start: "top 82%", end: "bottom 65%", scrub: 1 } });
       gsap.from(".contact-form label", { y: 24, opacity: 0, stagger: .08, ease: "power2.out", scrollTrigger: { trigger: ".contact-form", start: "top 84%", once: true } });
       gsap.to(".ambient-orb", { xPercent: 90, yPercent: 310, rotate: 240, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 1.3 } });
+      gsap.utils.toArray<HTMLElement>(".copy-focus").forEach((el) => {
+        gsap.from(el, { y: 18, opacity: .2, filter: "blur(5px)", duration: .9, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
+      });
       gsap.to(".progress", { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: .2 } });
     }, root);
     return () => ctx.revert();
@@ -137,11 +140,11 @@ export function StudioExperience() {
         <section className="manifesto section-pad">
           <p className="section-index">00 / Point of view</p>
           <div data-reveal><p className="manifesto-lead">A forgettable website is an expensive way to be invisible.</p><h2>We build digital places with <em>gravity</em>—the kind people stop in, understand, and remember.</h2></div>
-          <aside data-reveal><p>Not decoration for decoration’s sake. Visual tension earns attention. Clear structure turns it into action. Clean code makes both feel effortless.</p><span>NorthForge principle № 01</span></aside>
+          <aside className="copy-focus" data-reveal><p>Not decoration for decoration’s sake. Visual tension earns attention. Clear structure turns it into action. Clean code makes both feel effortless.</p><span>NorthForge principle № 01</span></aside>
         </section>
 
         <section className="work section-pad" id="work">
-          <div className="section-heading" data-reveal><div><p className="section-index">01 / Selected work</p><h2>Proof, not promises.</h2></div><p>One live client build. Two clearly labelled concept studies. No invented awards. No borrowed credibility.</p></div>
+          <div className="section-heading" data-reveal><div><p className="section-index">01 / Selected work</p><h2>Proof, not promises.</h2></div><p className="copy-focus">One live client build. Two clearly labelled concept studies. No invented awards. No borrowed credibility.</p></div>
           <article className="case case-featured" data-reveal>
             <div className="case-visual lemon-visual"><Image src="/images/lemon-mint-event.webp" alt="Lemon Mint MTL styled catering event table" fill sizes="(max-width: 900px) 100vw, 62vw" /><div className="case-browser"><span /><span /><span /><b>lemonmintmtl.netlify.app</b></div><div className="case-phone"><Image src="/images/lemon-mint-menu.webp" alt="Lemon Mint MTL mobile menu presentation" fill sizes="220px" /></div></div>
             <div className="case-info"><div><span className="pill live">Live client work</span><span className="case-no">01</span></div><p className="case-type">Catering · Hospitality · Montreal</p><h3>Lemon Mint <em>MTL</em></h3><p>A bilingual, image-led digital home for premium halal catering and alcohol-free event experiences—built around fast inquiry paths and real portfolio work.</p><ul><li>Bilingual structure</li><li>Service architecture</li><li>Quote conversion flow</li></ul><a className="button dark" href="https://lemonmintmtl.netlify.app/en" target="_blank" rel="noreferrer">Visit live website <Arrow /></a></div>
@@ -153,12 +156,12 @@ export function StudioExperience() {
         </section>
 
         <section className="services section-pad" id="services">
-          <div className="section-heading light" data-reveal><div><p className="section-index">02 / Expertise</p><h2>Craft, with a job to do.</h2></div><p>We take the whole path—from first impression to final click—seriously.</p></div>
+          <div className="section-heading light" data-reveal><div><p className="section-index">02 / Expertise</p><h2>Craft, with a job to do.</h2></div><p className="copy-focus">We take the whole path—from first impression to final click—seriously.</p></div>
           <div className="service-list" data-stagger>{services.map(([n, title, copy]) => <article key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p><i>↗</i></article>)}</div>
         </section>
 
         <section className="pricing section-pad" id="pricing">
-          <div className="section-heading" data-reveal><div><p className="section-index">03 / Investment</p><h2>Clear starting points.</h2></div><p>One-time website investment, typically delivered in 2–4 weeks. Scope is confirmed before work begins.</p></div>
+          <div className="section-heading" data-reveal><div><p className="section-index">03 / Investment</p><h2>Clear starting points.</h2></div><p className="copy-focus">One-time website investment, typically delivered in 2–4 weeks. Scope is confirmed before work begins.</p></div>
           <div className="price-label"><span>Website packages</span><i /></div>
           <div className="pricing-grid" data-stagger>{websitePlans.map((plan) => <article className={plan.featured ? "price-card featured" : "price-card"} key={plan.name}>{plan.featured && <div className="plan-aura" aria-hidden="true"><i /><i /><i /></div>}{plan.featured && <span className="recommend">Most popular</span>}<div><p>Starting at</p><strong>{plan.price}</strong></div><h3>{plan.name}</h3><p>{plan.note}</p><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href="#contact">Choose {plan.name.replace(" Website", "")} <Arrow /></a></article>)}</div>
           <div className="price-label support-label"><span>Monthly support</span><i /></div>
@@ -167,14 +170,14 @@ export function StudioExperience() {
         </section>
 
         <section className="process section-pad" id="process">
-          <div className="process-title" data-reveal><p className="section-index">04 / Process</p><h2>Three acts.<br /><em>Zero mystery.</em></h2><p>A focused process keeps momentum high and feedback useful. You always know what is happening and why.</p></div>
+          <div className="process-title" data-reveal><p className="section-index">04 / Process</p><h2>Three acts.<br /><em>Zero mystery.</em></h2><p className="copy-focus">A focused process keeps momentum high and feedback useful. You always know what is happening and why.</p></div>
           <div className="process-steps" data-stagger>{process.map(([n, title, copy]) => <article key={n}><span>{n}</span><div className="process-glyph" aria-hidden="true"><i /><i /></div><h3>{title}</h3><p>{copy}</p></article>)}</div>
         </section>
 
         <section className="belief section-pad"><p className="section-index">05 / Why NorthForge</p><div data-reveal><span className="huge-quote">“</span><h2>Your website works the night shift. It should be your best employee, not your quietest expense.</h2></div><div className="belief-points" data-stagger><p><span>01</span>Hand-built direction, not a rearranged template.</p><p><span>02</span>Hospitality instincts, backed by conversion clarity.</p><p><span>03</span>Direct communication with the person building it.</p><p><span>04</span>Premium restraint—no fake metrics, claims, or theatre.</p></div></section>
 
         <section className="contact section-pad" id="contact">
-          <div className="contact-intro" data-reveal><p className="section-index">06 / Begin</p><h2>Tell us what the business should <em>feel like</em> online.</h2><p>Book a free 20-minute conversation. We’ll talk through what you need, what it costs, and whether NorthForge is the right fit.</p><div className="contact-direct"><a href="mailto:northforge.design@gmail.com">northforge.design@gmail.com</a><a href="tel:+15199810659">519-981-0659</a><a href="https://www.instagram.com/northforge.web" target="_blank" rel="noreferrer">@northforge.web</a></div></div>
+          <div className="contact-intro" data-reveal><p className="section-index">06 / Begin</p><h2>Tell us what the business should <em>feel like</em> online.</h2><p className="copy-focus">Book a free 20-minute conversation. We’ll talk through what you need, what it costs, and whether NorthForge is the right fit.</p><div className="contact-direct"><a href="mailto:northforge.design@gmail.com">northforge.design@gmail.com</a><a href="tel:+15199810659">519-981-0659</a><a href="https://www.instagram.com/northforge.web" target="_blank" rel="noreferrer">@northforge.web</a></div></div>
           <form className="contact-form" name="project-inquiry" method="POST" data-netlify="true" onSubmit={handleSubmit} data-reveal>
             <input type="hidden" name="form-name" value="project-inquiry" />
             <label><span>01 — Name</span><input name="name" required placeholder="Your name" autoComplete="name" /></label>

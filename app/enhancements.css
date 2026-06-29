@@ -317,6 +317,109 @@ footer {
   text-wrap: balance;
 }
 
+/* Supporting copy should carry authority, not disappear beside the display type. */
+.hero-copy {
+  max-width: 620px;
+  color: #c5c1b8;
+  font-size: clamp(16px, 1.28vw, 19px);
+  font-weight: 520;
+  line-height: 1.68;
+}
+
+.section-heading > p {
+  max-width: 470px;
+  color: #77736b;
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.7;
+}
+
+.section-heading.light > p {
+  color: #aaa69d;
+}
+
+.manifesto-lead {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.manifesto aside {
+  color: #4f4c46;
+  font-size: 14px;
+  font-weight: 520;
+  line-height: 1.75;
+}
+
+.case-info > p:not(.case-type),
+.concept-copy > p:last-of-type {
+  color: #b1ada4;
+  font-size: 14px;
+  font-weight: 520;
+  line-height: 1.72;
+}
+
+.service-list p {
+  color: #aaa69d;
+  font-size: 14px;
+  font-weight: 520;
+  line-height: 1.7;
+}
+
+.price-card > p {
+  color: #666158;
+  font-size: 12.5px;
+  font-weight: 580;
+  line-height: 1.58;
+}
+
+.price-card.featured > p {
+  color: #b9b3a8;
+}
+
+.price-card li {
+  color: #625e56;
+  font-size: 11.5px;
+  font-weight: 540;
+  line-height: 1.55;
+}
+
+.price-card.featured li {
+  color: #c2bdb3;
+}
+
+.process-title > p:last-child,
+.process-steps p {
+  color: #aaa69d;
+  font-size: 14px;
+  font-weight: 520;
+  line-height: 1.7;
+}
+
+.belief-points p {
+  color: #b3afa5;
+  font-size: 12.5px;
+  font-weight: 560;
+  line-height: 1.65;
+}
+
+.contact-intro > p:not(.section-index) {
+  color: #5c5851;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.75;
+}
+
+.form-note,
+footer p {
+  font-size: 11px;
+  font-weight: 520;
+  line-height: 1.65;
+}
+
+.copy-focus {
+  will-change: transform, opacity, filter;
+}
+
 @media (max-width: 980px) {
   .site-header { padding: 0 15px 0 2px; }
   .nav { top: 0; }
@@ -336,6 +439,15 @@ footer {
   .price-card.featured::before { inset: -9px; filter: blur(14px); }
   .price-card.featured { transform: none; }
   .plan-aura { inset: -32px -18px !important; }
+  .hero-copy { font-size: 15px; }
+  .section-heading > p,
+  .manifesto aside,
+  .case-info > p:not(.case-type),
+  .concept-copy > p:last-of-type,
+  .service-list p,
+  .process-title > p:last-child,
+  .process-steps p,
+  .contact-intro > p:not(.section-index) { font-size: 13.5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
