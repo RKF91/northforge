@@ -312,6 +312,57 @@ footer {
   background: linear-gradient(90deg, rgba(183, 135, 65, 0.08), transparent 70%);
 }
 
+.button.submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.form-status {
+  min-height: 0;
+  max-width: 560px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease, min-height 0.35s ease, margin 0.35s ease;
+}
+
+.form-status p {
+  margin: 0;
+  padding: 13px 16px;
+  border-left: 2px solid currentColor;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+.form-status strong {
+  display: block;
+  font-size: 14px;
+}
+
+.form-status.success,
+.form-status.error {
+  min-height: 64px;
+  margin-top: 18px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-status.success {
+  color: #6d572e;
+  background: linear-gradient(90deg, rgba(191, 147, 72, 0.16), transparent);
+}
+
+.form-status.error {
+  color: #7f342d;
+  background: linear-gradient(90deg, rgba(146, 49, 39, 0.1), transparent);
+}
+
+.form-status.error a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .section-heading h2,
 .manifesto h2,
 .belief h2 {

@@ -48,7 +48,7 @@ export function StudioExperience() {
   const root = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [desktop3D, setDesktop3D] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 760px) and (prefers-reduced-motion: no-preference)");
@@ -99,11 +99,33 @@ export function StudioExperience() {
   };
   const resetMagnetic = (event: MouseEvent<HTMLAnchorElement>) => gsap.to(event.currentTarget, { x: 0, y: 0, duration: .55, ease: "elastic.out(1,.35)" });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(form) as never).toString() })
-      .then(() => setSent(true)).catch(() => form.submit());
+    const formData = new FormData(form);
+    const payload = new URLSearchParams();
+
+    payload.set("form-name", "northforge-booking");
+    formData.forEach((value, key) => {
+      if (key !== "form-name" && typeof value === "string") payload.append(key, value);
+    });
+
+    setFormStatus("submitting");
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: payload.toString(),
+      });
+
+      if (!response.ok) throw new Error(`Form submission failed with ${response.status}`);
+
+      form.reset();
+      setFormStatus("success");
+    } catch {
+      setFormStatus("error");
+    }
   };
 
   return (
@@ -178,15 +200,19 @@ export function StudioExperience() {
 
         <section className="contact section-pad" id="contact">
           <div className="contact-intro" data-reveal><p className="section-index">06 / Begin</p><h2>Tell us what the business should <em>feel like</em> online.</h2><p className="copy-focus">Book a free 20-minute conversation. We’ll talk through what you need, what it costs, and whether NorthForge is the right fit.</p><div className="contact-direct"><a href="mailto:northforge.design@gmail.com">northforge.design@gmail.com</a><a href="tel:+15199810659">519-981-0659</a><a href="https://www.instagram.com/northforge.web" target="_blank" rel="noreferrer">@northforge.web</a></div></div>
-          <form className="contact-form" name="project-inquiry" method="POST" data-netlify="true" onSubmit={handleSubmit} data-reveal>
-            <input type="hidden" name="form-name" value="project-inquiry" />
+          <form className="contact-form" name="northforge-booking" method="POST" action="/" onSubmit={handleSubmit} data-reveal>
+            <input type="hidden" name="form-name" value="northforge-booking" />
             <label><span>01 — Name</span><input name="name" required placeholder="Your name" autoComplete="name" /></label>
-            <label><span>02 — Business name</span><input name="business-name" required placeholder="Your business" autoComplete="organization" /></label>
+            <label><span>02 — Business name</span><input name="businessName" required placeholder="Your business" autoComplete="organization" /></label>
             <div className="form-row"><label><span>03 — Email</span><input type="email" name="email" required placeholder="you@business.com" autoComplete="email" /></label><label><span>04 — Phone</span><input type="tel" name="phone" placeholder="(519) 000-0000" autoComplete="tel" /></label></div>
-            <div className="form-row"><label><span>05 — Business type</span><select name="business-type" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce / Online store</option><option>Restaurant / Hospitality</option><option>Local service</option><option>Professional service</option><option>Retail</option><option>Creator / Personal brand</option><option>Startup / SaaS</option><option>Nonprofit / Community</option><option>Something else</option></select></label><label><span>06 — Project type</span><select name="project-type" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce build</option><option>Business Website</option><option>Website redesign</option><option>Premium Custom Experience</option><option>Monthly Support</option><option>Not sure yet</option></select></label></div>
-            <div className="form-row"><label><span>07 — Budget</span><select name="budget" required defaultValue=""><option value="" disabled>Choose range</option><option>$299–$599</option><option>$600–$1,499</option><option>$1,500–$3,000</option><option>$3,000+</option><option>Not sure yet</option></select></label><label><span>08 — Preferred meeting time</span><input name="meeting-time" placeholder="Tuesday afternoon" /></label></div>
+            <div className="form-row"><label><span>05 — Business type</span><select name="businessType" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce / Online store</option><option>Restaurant / Hospitality</option><option>Local service</option><option>Professional service</option><option>Retail</option><option>Creator / Personal brand</option><option>Startup / SaaS</option><option>Nonprofit / Community</option><option>Something else</option></select></label><label><span>06 — Project type</span><select name="projectType" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce build</option><option>Business Website</option><option>Website redesign</option><option>Premium Custom Experience</option><option>Monthly Support</option><option>Not sure yet</option></select></label></div>
+            <div className="form-row"><label><span>07 — Budget</span><select name="budget" required defaultValue=""><option value="" disabled>Choose range</option><option>$299–$599</option><option>$600–$1,499</option><option>$1,500–$3,000</option><option>$3,000+</option><option>Not sure yet</option></select></label><label><span>08 — Preferred meeting time</span><input name="preferredTime" placeholder="Tuesday afternoon" /></label></div>
             <label><span>09 — Message</span><textarea name="message" required placeholder="What are you building—and what needs to change?" rows={4} /></label>
-            <button className="button submit" type="submit">{sent ? "Message received" : "Send project brief"} <Arrow /></button>
+            <button className="button submit" type="submit" disabled={formStatus === "submitting"} aria-busy={formStatus === "submitting"}>{formStatus === "submitting" ? "Sending brief" : formStatus === "success" ? "Message received" : "Send project brief"} <Arrow /></button>
+            <div className={`form-status ${formStatus}`} role={formStatus === "error" ? "alert" : "status"} aria-live="polite">
+              {formStatus === "success" && <p><strong>Your brief is in.</strong> We’ll be in touch shortly.</p>}
+              {formStatus === "error" && <p><strong>Something interrupted the send.</strong> Please try again or email <a href="mailto:northforge.design@gmail.com">northforge.design@gmail.com</a>.</p>}
+            </div>
             <p className="form-note">Secure Netlify form submission. No mailing list. No sales sequence.</p>
           </form>
         </section>
