@@ -9,6 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const ForgeScene = dynamic(() => import("./ForgeScene"), { ssr: false });
 const ScrollArtifacts = dynamic(() => import("./ScrollArtifacts"), { ssr: false });
 
+// Replace YOUR_FORM_ID with the live Formspree form ID when the endpoint is ready.
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
 const services = [
   ["01", "Custom Website Design", "No page-builder fingerprints. Every screen is composed around your brand, your customer, and the action that matters."],
   ["02", "Mobile-First Build", "Most first impressions happen in one hand. We make buying, booking, browsing, calling, and contacting you feel immediate."],
@@ -48,7 +51,7 @@ export function StudioExperience() {
   const root = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [desktop3D, setDesktop3D] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "mailto" | "error">("idle");
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 760px) and (prefers-reduced-motion: no-preference)");
@@ -103,20 +106,33 @@ export function StudioExperience() {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const payload = new URLSearchParams();
-
-    payload.set("form-name", "northforge-booking");
-    formData.forEach((value, key) => {
-      if (key !== "form-name" && typeof value === "string") payload.append(key, value);
-    });
 
     setFormStatus("submitting");
 
+    if (FORMSPREE_ENDPOINT.includes("YOUR_FORM_ID")) {
+      const emailBody = [
+        `Name: ${formData.get("name") ?? ""}`,
+        `Business: ${formData.get("businessName") ?? ""}`,
+        `Email: ${formData.get("email") ?? ""}`,
+        `Phone: ${formData.get("phone") ?? ""}`,
+        `Business type: ${formData.get("businessType") ?? ""}`,
+        `Project type: ${formData.get("projectType") ?? ""}`,
+        `Budget: ${formData.get("budget") ?? ""}`,
+        `Preferred time: ${formData.get("preferredTime") ?? ""}`,
+        "",
+        String(formData.get("message") ?? ""),
+      ].join("\n");
+
+      window.location.href = `mailto:northforge.design@gmail.com?subject=${encodeURIComponent("NorthForge project inquiry")}&body=${encodeURIComponent(emailBody)}`;
+      setFormStatus("mailto");
+      return;
+    }
+
     try {
-      const response = await fetch("/", {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: payload.toString(),
+        headers: { Accept: "application/json" },
+        body: formData,
       });
 
       if (!response.ok) throw new Error(`Form submission failed with ${response.status}`);
@@ -200,20 +216,20 @@ export function StudioExperience() {
 
         <section className="contact section-pad" id="contact">
           <div className="contact-intro" data-reveal><p className="section-index">06 / Begin</p><h2>Tell us what the business should <em>feel like</em> online.</h2><p className="copy-focus">Book a free 20-minute conversation. We’ll talk through what you need, what it costs, and whether NorthForge is the right fit.</p><div className="contact-direct"><a href="mailto:northforge.design@gmail.com">northforge.design@gmail.com</a><a href="tel:+15199810659">519-981-0659</a><a href="https://www.instagram.com/northforge.web" target="_blank" rel="noreferrer">@northforge.web</a></div></div>
-          <form className="contact-form" name="northforge-booking" method="POST" action="/" onSubmit={handleSubmit} data-reveal>
-            <input type="hidden" name="form-name" value="northforge-booking" />
+          <form className="contact-form" method="POST" action={FORMSPREE_ENDPOINT} onSubmit={handleSubmit} data-reveal>
             <label><span>01 — Name</span><input name="name" required placeholder="Your name" autoComplete="name" /></label>
             <label><span>02 — Business name</span><input name="businessName" required placeholder="Your business" autoComplete="organization" /></label>
             <div className="form-row"><label><span>03 — Email</span><input type="email" name="email" required placeholder="you@business.com" autoComplete="email" /></label><label><span>04 — Phone</span><input type="tel" name="phone" placeholder="(519) 000-0000" autoComplete="tel" /></label></div>
             <div className="form-row"><label><span>05 — Business type</span><select name="businessType" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce / Online store</option><option>Restaurant / Hospitality</option><option>Local service</option><option>Professional service</option><option>Retail</option><option>Creator / Personal brand</option><option>Startup / SaaS</option><option>Nonprofit / Community</option><option>Something else</option></select></label><label><span>06 — Project type</span><select name="projectType" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce build</option><option>Business Website</option><option>Website redesign</option><option>Premium Custom Experience</option><option>Monthly Support</option><option>Not sure yet</option></select></label></div>
             <div className="form-row"><label><span>07 — Budget</span><select name="budget" required defaultValue=""><option value="" disabled>Choose range</option><option>$299–$599</option><option>$600–$1,499</option><option>$1,500–$3,000</option><option>$3,000+</option><option>Not sure yet</option></select></label><label><span>08 — Preferred meeting time</span><input name="preferredTime" placeholder="Tuesday afternoon" /></label></div>
             <label><span>09 — Message</span><textarea name="message" required placeholder="What are you building—and what needs to change?" rows={4} /></label>
-            <button className="button submit" type="submit" disabled={formStatus === "submitting"} aria-busy={formStatus === "submitting"}>{formStatus === "submitting" ? "Sending brief" : formStatus === "success" ? "Message received" : "Send project brief"} <Arrow /></button>
+            <button className="button submit" type="submit" disabled={formStatus === "submitting"} aria-busy={formStatus === "submitting"}>{formStatus === "submitting" ? "Sending brief" : formStatus === "success" ? "Message received" : formStatus === "mailto" ? "Email draft opened" : "Send project brief"} <Arrow /></button>
             <div className={`form-status ${formStatus}`} role={formStatus === "error" ? "alert" : "status"} aria-live="polite">
               {formStatus === "success" && <p><strong>Your brief is in.</strong> We’ll be in touch shortly.</p>}
+              {formStatus === "mailto" && <p><strong>Your email draft is ready.</strong> Send it from your mail app to finish the inquiry.</p>}
               {formStatus === "error" && <p><strong>Something interrupted the send.</strong> Please try again or email <a href="mailto:northforge.design@gmail.com">northforge.design@gmail.com</a>.</p>}
             </div>
-            <p className="form-note">Secure Netlify form submission. No mailing list. No sales sequence.</p>
+            <p className="form-note">Direct inquiry. No mailing list. No sales sequence.</p>
           </form>
         </section>
       </main>
