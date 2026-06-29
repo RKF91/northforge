@@ -10,10 +10,10 @@ const serif = Cormorant_Garamond({ subsets: ["latin"], variable: "--font-serif",
 export const metadata: Metadata = {
   metadataBase: new URL("https://northforgeweb.netlify.app"),
   title: "NorthForge — Websites with gravity",
-  description: "Custom web design for restaurants, hospitality brands, and local businesses in Ontario and beyond.",
+  description: "Custom websites for e-commerce, service businesses, restaurants, creators, and growing brands in Ontario and beyond.",
   openGraph: {
     title: "NorthForge — Websites with gravity",
-    description: "Premium, mobile-first websites built to make the right impression before the first visit.",
+    description: "Premium, mobile-first websites built to sell, book, showcase, and grow businesses of every kind.",
     type: "website",
   },
 };

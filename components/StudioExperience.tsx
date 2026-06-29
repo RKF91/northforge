@@ -11,17 +11,17 @@ const ScrollArtifacts = dynamic(() => import("./ScrollArtifacts"), { ssr: false 
 
 const services = [
   ["01", "Custom Website Design", "No page-builder fingerprints. Every screen is composed around your brand, your customer, and the action that matters."],
-  ["02", "Mobile-First Build", "Most first impressions happen in one hand. We make calling, booking, browsing, and finding you feel immediate."],
-  ["03", "Hospitality Focus", "Menus, reservations, galleries, ordering, and hours are treated as the experience—not administrative leftovers."],
-  ["04", "Local SEO Setup", "A clean technical foundation helps search engines understand where you are, what you do, and who should find you."],
-  ["05", "Contact & Booking Flows", "OpenTable, direct booking, calls, email, or a custom inquiry path: the next step is always obvious."],
+  ["02", "Mobile-First Build", "Most first impressions happen in one hand. We make buying, booking, browsing, calling, and contacting you feel immediate."],
+  ["03", "Built for Your Business", "Stores, product catalogues, service pages, menus, memberships, lead funnels, and custom ideas—structured around how your business actually works."],
+  ["04", "Search & Discovery", "A clean technical foundation helps search engines understand what you offer, where you operate, and who should find you."],
+  ["05", "Commerce & Conversion Flows", "Purchases, quote requests, bookings, subscriptions, calls, and custom inquiries: every important next step is made obvious."],
   ["06", "Ongoing Support", "Your business keeps moving. Monthly care keeps the site fast, current, and useful without asking you to touch code."],
 ];
 
 const websitePlans = [
   { name: "Starter Website", price: "$299", note: "For a clear, professional first presence.", items: ["Single-page website", "Mobile-responsive design", "Contact section", "Basic branding & layout", "Calls and directions", "Fast-loading structure"] },
-  { name: "Business Website", price: "$599", note: "The complete foundation for a growing business.", featured: true, items: ["Multi-page custom website", "Menu or service pages", "Premium animations", "Mobile-first optimization", "Booking integrations", "Modern brand direction", "Enhanced user experience", "SEO-ready structure"] },
-  { name: "Premium Experience", price: "Custom", note: "For brands ready to own the room.", items: ["Fully custom direction", "Advanced interactions", "Premium visual storytelling", "Campaign landing pages", "Advanced booking systems", "Ongoing optimization", "High-end digital experience"] },
+  { name: "Business Website", price: "$599", note: "The complete foundation for a growing business.", featured: true, items: ["Multi-page custom website", "Store, service, or content pages", "Premium animations", "Mobile-first optimization", "Commerce, booking, or lead integrations", "Modern brand direction", "Enhanced user experience", "SEO-ready structure"] },
+  { name: "Premium Experience", price: "Custom", note: "For brands ready to own the room.", items: ["Fully custom direction", "Advanced interactions", "Premium visual storytelling", "Campaign landing pages", "Advanced commerce or business systems", "Ongoing optimization", "High-end digital experience"] },
 ];
 
 const supportPlans = [
@@ -130,7 +130,7 @@ export function StudioExperience() {
           <div className="hero-copy-block">
             <p className="eyebrow hero-kicker"><span /> Independent web studio · Ontario, Canada</p>
             <h1 className="hero-title" aria-label="Make your first impression impossible to forget."><span className="word">Make your first</span><span className="word serif">impression</span><span className="word">impossible to forget.</span></h1>
-            <p className="hero-copy">NorthForge builds atmospheric, fast websites for restaurants, hospitality brands, and local businesses that are judged before anyone walks through the door.</p>
+            <p className="hero-copy">NorthForge builds atmospheric, fast websites for businesses of every shape—from e-commerce and restaurants to local services, professional firms, creators, and ideas that do not fit a category.</p>
             <div className="hero-actions"><a className="button primary magnetic" href="#contact" onMouseMove={magnetic} onMouseLeave={resetMagnetic}>Start a project <Arrow /></a><a className="text-link" href="#work">Explore selected work <span>↓</span></a></div>
           </div>
           <div className="hero-orbit" aria-hidden="true">{desktop3D ? <ForgeScene /> : <div className="artifact-fallback"><i /><i /><i /></div>}<span className="orbit-label orbit-a">Design with intent</span><span className="orbit-label orbit-b">Built to perform</span></div>
@@ -144,7 +144,7 @@ export function StudioExperience() {
         </section>
 
         <section className="work section-pad" id="work">
-          <div className="section-heading" data-reveal><div><p className="section-index">01 / Selected work</p><h2>Proof, not promises.</h2></div><p className="copy-focus">One live client build. Two clearly labelled concept studies. No invented awards. No borrowed credibility.</p></div>
+          <div className="section-heading" data-reveal><div><p className="section-index">01 / Selected work</p><h2>Proof, not promises.</h2></div><p className="copy-focus">Selected work shows the craft. The same strategy scales to products, services, commerce, platforms, and ideas still taking shape.</p></div>
           <article className="case case-featured" data-reveal>
             <div className="case-visual lemon-visual"><Image src="/images/lemon-mint-event.webp" alt="Lemon Mint MTL styled catering event table" fill sizes="(max-width: 900px) 100vw, 62vw" /><div className="case-browser"><span /><span /><span /><b>lemonmintmtl.netlify.app</b></div><div className="case-phone"><Image src="/images/lemon-mint-menu.webp" alt="Lemon Mint MTL mobile menu presentation" fill sizes="220px" /></div></div>
             <div className="case-info"><div><span className="pill live">Live client work</span><span className="case-no">01</span></div><p className="case-type">Catering · Hospitality · Montreal</p><h3>Lemon Mint <em>MTL</em></h3><p>A bilingual, image-led digital home for premium halal catering and alcohol-free event experiences—built around fast inquiry paths and real portfolio work.</p><ul><li>Bilingual structure</li><li>Service architecture</li><li>Quote conversion flow</li></ul><a className="button dark" href="https://lemonmintmtl.netlify.app/en" target="_blank" rel="noreferrer">Visit live website <Arrow /></a></div>
@@ -174,7 +174,7 @@ export function StudioExperience() {
           <div className="process-steps" data-stagger>{process.map(([n, title, copy]) => <article key={n}><span>{n}</span><div className="process-glyph" aria-hidden="true"><i /><i /></div><h3>{title}</h3><p>{copy}</p></article>)}</div>
         </section>
 
-        <section className="belief section-pad"><p className="section-index">05 / Why NorthForge</p><div data-reveal><span className="huge-quote">“</span><h2>Your website works the night shift. It should be your best employee, not your quietest expense.</h2></div><div className="belief-points" data-stagger><p><span>01</span>Hand-built direction, not a rearranged template.</p><p><span>02</span>Hospitality instincts, backed by conversion clarity.</p><p><span>03</span>Direct communication with the person building it.</p><p><span>04</span>Premium restraint—no fake metrics, claims, or theatre.</p></div></section>
+        <section className="belief section-pad"><p className="section-index">05 / Why NorthForge</p><div data-reveal><span className="huge-quote">“</span><h2>Your website works the night shift. It should be your best employee, not your quietest expense.</h2></div><div className="belief-points" data-stagger><p><span>01</span>Hand-built direction, not a rearranged template.</p><p><span>02</span>Business instincts, backed by conversion clarity.</p><p><span>03</span>Direct communication with the person building it.</p><p><span>04</span>Premium restraint—no fake metrics, claims, or theatre.</p></div></section>
 
         <section className="contact section-pad" id="contact">
           <div className="contact-intro" data-reveal><p className="section-index">06 / Begin</p><h2>Tell us what the business should <em>feel like</em> online.</h2><p className="copy-focus">Book a free 20-minute conversation. We’ll talk through what you need, what it costs, and whether NorthForge is the right fit.</p><div className="contact-direct"><a href="mailto:northforge.design@gmail.com">northforge.design@gmail.com</a><a href="tel:+15199810659">519-981-0659</a><a href="https://www.instagram.com/northforge.web" target="_blank" rel="noreferrer">@northforge.web</a></div></div>
@@ -183,7 +183,7 @@ export function StudioExperience() {
             <label><span>01 — Name</span><input name="name" required placeholder="Your name" autoComplete="name" /></label>
             <label><span>02 — Business name</span><input name="business-name" required placeholder="Your business" autoComplete="organization" /></label>
             <div className="form-row"><label><span>03 — Email</span><input type="email" name="email" required placeholder="you@business.com" autoComplete="email" /></label><label><span>04 — Phone</span><input type="tel" name="phone" placeholder="(519) 000-0000" autoComplete="tel" /></label></div>
-            <div className="form-row"><label><span>05 — Business type</span><select name="business-type" required defaultValue=""><option value="" disabled>Select one</option><option>Restaurant</option><option>Cafe</option><option>Hospitality</option><option>Local service</option><option>Retail</option><option>Other local business</option></select></label><label><span>06 — Project type</span><select name="project-type" required defaultValue=""><option value="" disabled>Select one</option><option>Starter Website</option><option>Business Website</option><option>Premium Custom Experience</option><option>Monthly Support</option><option>Not sure yet</option></select></label></div>
+            <div className="form-row"><label><span>05 — Business type</span><select name="business-type" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce / Online store</option><option>Restaurant / Hospitality</option><option>Local service</option><option>Professional service</option><option>Retail</option><option>Creator / Personal brand</option><option>Startup / SaaS</option><option>Nonprofit / Community</option><option>Something else</option></select></label><label><span>06 — Project type</span><select name="project-type" required defaultValue=""><option value="" disabled>Select one</option><option>E-commerce build</option><option>Business Website</option><option>Website redesign</option><option>Premium Custom Experience</option><option>Monthly Support</option><option>Not sure yet</option></select></label></div>
             <div className="form-row"><label><span>07 — Budget</span><select name="budget" required defaultValue=""><option value="" disabled>Choose range</option><option>$299–$599</option><option>$600–$1,499</option><option>$1,500–$3,000</option><option>$3,000+</option><option>Not sure yet</option></select></label><label><span>08 — Preferred meeting time</span><input name="meeting-time" placeholder="Tuesday afternoon" /></label></div>
             <label><span>09 — Message</span><textarea name="message" required placeholder="What are you building—and what needs to change?" rows={4} /></label>
             <button className="button submit" type="submit">{sent ? "Message received" : "Send project brief"} <Arrow /></button>
