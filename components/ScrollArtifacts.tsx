@@ -98,7 +98,7 @@ function Artifacts() {
 export default function ScrollArtifacts() {
   return (
     <div className="journey-3d" aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 7], fov: 42 }} dpr={[1, 1.35]} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }} onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}>
+      <Canvas style={{ pointerEvents: "none" }} camera={{ position: [0, 0, 7], fov: 42 }} dpr={[1, 1.35]} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }} onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}>
         <ambientLight intensity={0.2} />
         <directionalLight position={[4, 5, 5]} intensity={3.4} color="#ffe7b7" />
         <pointLight position={[-4, -2, 4]} intensity={22} distance={10} color="#b86f1d" />
