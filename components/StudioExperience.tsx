@@ -116,7 +116,7 @@ export function StudioExperience() {
     setFormStatus("submitting");
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: payload.toString(),
@@ -203,7 +203,7 @@ export function StudioExperience() {
 
         <section className="contact section-pad" id="contact">
           <div className="contact-intro" data-reveal><p className="section-index">06 / Begin</p><h2>Tell us what the business should <em>feel like</em> online.</h2><p className="copy-focus">Book a free 20-minute conversation. We’ll talk through what you need, what it costs, and whether NorthForge is the right fit.</p><div className="contact-direct"><span>northforge.design@gmail.com</span><a href="tel:+15199810659">519-981-0659</a><a href="https://www.instagram.com/northforge.web" target="_blank" rel="noreferrer">@northforge.web</a></div></div>
-          <form className="contact-form" name="northforge-booking" method="POST" action="/" onSubmit={handleSubmit} data-reveal>
+          <form className="contact-form" name="northforge-booking" method="POST" action="/__forms.html" onSubmit={handleSubmit} data-reveal>
             <input type="hidden" name="form-name" value="northforge-booking" />
             <label><span>01 — Name</span><input name="name" required placeholder="Your name" autoComplete="name" /></label>
             <label><span>02 — Business name</span><input name="businessName" required placeholder="Your business" autoComplete="organization" /></label>
